@@ -12,12 +12,13 @@
 
 | 담당자 | 번호 | 기능 | 만들 파일 |
 |---|---|---|---|
-| 김선욱 | 1 | 앞으로 2초 이동 | `moves/example_forward.py` (작성 완료 — 참고용) |
-| 팀원 A | 2 | 뒤로 2초 이동 | `moves/backward.py` |
-| 팀원 B | 3 | 제자리에서 왼쪽으로 90도 회전 | `moves/turn_left.py` |
-| 팀원 C | 4 | 제자리에서 오른쪽으로 90도 회전 | `moves/turn_right.py` |
-| 팀원 D | 5 | 사각형 그리며 한 바퀴 | `moves/square.py` |
+| 김선욱 | 0 | (예제) 앞으로 2초 이동 | `moves/example_forward.py` — 작성 완료, 참고용 |
+| 박준선 | 1 | 왼쪽 — 제자리에서 반시계 방향 90도 회전 | `moves/move_left.py` |
+| 조안정 | 2 | 오른쪽 — 제자리에서 시계 방향 90도 회전 | `moves/move_right.py` |
+| 이태경 | 3 | 위쪽 — 앞으로 2초 이동 | `moves/move_up.py` |
+| 김반석 | 4 | 아래쪽 — 뒤로 2초 이동 | `moves/move_down.py` |
 
+방향키 조작과 같은 방식입니다. 위/아래는 전진·후진, 좌/우는 제자리 회전입니다.
 ---
 
 ## 처음 한 번만 하는 준비
@@ -200,7 +201,23 @@ class Square(MoveCommand):
             node.publish_for(self.make_twist(linear_x=2.0), 2.0)
             node.publish_for(self.make_twist(angular_z=math.pi / 2), 1.0)
 ```
+### 방향별 구현 힌트
 
+```python
+# 위쪽 (전진)
+node.publish_for(self.make_twist(linear_x=2.0), 2.0)
+
+# 아래쪽 (후진)
+node.publish_for(self.make_twist(linear_x=-2.0), 2.0)
+
+# 왼쪽 (반시계 회전) — math.pi / 2 는 초당 90도
+node.publish_for(self.make_twist(angular_z=math.pi / 2), 1.0)
+
+# 오른쪽 (시계 회전) — 음수면 반대 방향
+node.publish_for(self.make_twist(angular_z=-math.pi / 2), 1.0)
+```
+
+회전을 쓰려면 파일 맨 위에 `import math` 를 추가하세요.
 ---
 
 ## 규칙

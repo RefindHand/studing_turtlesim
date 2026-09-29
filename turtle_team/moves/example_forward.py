@@ -7,8 +7,8 @@ from .base import MoveCommand
 
 
 class Forward(MoveCommand):
-    key = "1"
-    description = "앞으로 2초 이동"
+    key = "0"
+    description = "(예제) 앞으로 2초 이동"
 
     def run(self, node):
         node.get_logger().info("앞으로 이동합니다")
