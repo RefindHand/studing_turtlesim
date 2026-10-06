@@ -2,7 +2,7 @@ from .base import MoveCommand
 
 
 class Backward(MoveCommand):
-    key = "2"
+    key = "4"
     description = "뒤로 2초 이동"
 
     def run(self, node):
